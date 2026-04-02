@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BB7 RP - Tha Bronx 3</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#001a00, #000000);
+    color: #00ff88;
+    animation: fadeIn 1.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+header {
+    background: #003300;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 3px solid #00ff88;
+}
+
+h1 {
+    margin: 0;
+    font-size: 40px;
+    letter-spacing: 3px;
+}
+
+nav {
+    background: #002200;
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: #00ff88;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: white;
+    transform: scale(1.2);
+}
+
+section {
+    padding: 30px;
+    border-bottom: 1px solid #00ff88;
+    animation: fadeIn 1.5s ease;
+}
+
+h2 {
+    color: #00ff88;
+}
+
+.arma {
+    margin: 10px 0;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.arma:hover {
+    transform: translateX(10px);
+    color: white;
+}
+
+.formulario input {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    width: 250px;
+    background: #002200;
+    border: 1px solid #00ff88;
+    color: white;
+}
+
+button {
+    padding: 10px 20px;
+    background: #00ff88;
+    border: none;
+    color: black;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #00cc66;
+    transform: scale(1.1);
+}
+
+#adminPanel {
+    display: none;
+    background: #001100;
+    padding: 20px;
+    border: 2px solid #00ff88;
+    margin-top: 10px;
+}
+
+#listaUsuarios {
+    margin-top: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #003300;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>💚 BB7 - Tha Bronx 3 💚</h1>
+    <p>Respeto, lealtad y calle</p>
+</header>
+
+<nav>
+    <a href="#historia">Historia</a>
+    <a href="#armas">Armas</a>
+    <a href="#redes">Redes</a>
+    <a href="#registro">Registro</a>
+    <a href="#admin">Alto Rango</a>
+</nav>
+
+<section id="historia">
+    <h2>📖 Historia</h2>
+    <p>
+        BB7 nació en el 2022 en las calles del Bronx con una visión clara:
+        dominar la escena con respeto, estilo y poder.
+    </p>
+    <p>
+        Fundada por Sxntana, la banda creció rápidamente gracias a su mentalidad
+        fuerte, disciplina y presencia en las calles.
+    </p>
+</section>
+
+<section id="armas">
+    <h2>🔫 Arsenal</h2>
+    <div class="arma">💥 Psa100Rnd</div>
+    <div class="arma">🔥 Orange Button</div>
+    <div class="arma">⚡ G17 Button</div>
+    <div class="arma">🚀 G23 Button</div>
+    <div class="arma">💣 Fully-Arb</div>
+</section>
+
+<section id="redes">
+    <h2>📱 Redes Sociales</h2>
+    <p>Síguenos en TikTok:</p>
+    <p><strong>@sxntana.__</strong></p>
+</section>
+
+<section id="registro">
+    <h2>📝 Registro de Miembros</h2>
+    <div class="formulario">
+        <input type="text" id="newUser" placeholder="Usuario">
+        <input type="password" id="newPass" placeholder="Contraseña">
+        <button onclick="registrar()">Registrarse</button>
+    </div>
+</section>
+
+<section id="admin">
+    <h2>🔒 Panel Alto Rango</h2>
+
+    <div class="formulario">
+        <input type="text" id="user" placeholder="Usuario">
+        <input type="password" id="pass" placeholder="Contraseña">
+        <button onclick="login()">Entrar</button>
+    </div>
+
+    <div id="adminPanel">
+        <h3>Bienvenido Alto Rango</h3>
+        <button onclick="verUsuarios()">Ver usuarios</button>
+        <div id="listaUsuarios"></div>
+    </div>
+</section>
+
+<footer>
+    <p>💚 BB7 © 2026</p>
+</footer>
+
+<script>
+// REGISTRO
+function registrar() {
+    let user = document.getElementById("newUser").value;
+    let pass = document.getElementById("newPass").value;
+
+    let usuarios = JSON.parse(localStorage.getItem("bb7")) || [];
+    usuarios.push({user, pass});
+    localStorage.setItem("bb7", JSON.stringify(usuarios));
+
+    alert("Usuario registrado");
+}
+
+// LOGIN ADMIN
+function login() {
+    let user = document.getElementById("user").value;
+    let pass = document.getElementById("pass").value;
+
+    if (user === "Sxntana" && pass === "Santi2021xx") {
+        document.getElementById("adminPanel").style.display = "block";
+    } else {
+        alert("Acceso denegado");
+    }
+}
+
+// VER USUARIOS
+function verUsuarios() {
+    let usuarios = JSON.parse(localStorage.getItem("bb7")) || [];
+    let contenedor = document.getElementById("listaUsuarios");
+
+    contenedor.innerHTML = "";
+
+    usuarios.forEach(u => {
+        contenedor.innerHTML += "<p>" + u.user + "</p>";
+    });
+}
+</script>
+
+</body>
+</html>
